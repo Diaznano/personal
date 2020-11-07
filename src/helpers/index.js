@@ -1,3 +1,7 @@
+import { Platform } from 'react-native';
+
+const isIphone = Platform.OS === 'ios';
+
 const validateRequiredField = (requiredFields, fieldsValues) => {
   let error = false;
   let errors = {};
@@ -14,4 +18,4 @@ const validateRequiredField = (requiredFields, fieldsValues) => {
   return error ? errors : null;
 };
 
-export { validateRequiredField };
+export { validateRequiredField, isIphone };

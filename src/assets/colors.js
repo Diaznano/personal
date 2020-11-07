@@ -1,6 +1,6 @@
 const colors = {
   PRIMARY_COLOR: '#5979FB',
-  BLUE: '#4F00E5',
+  BLUE: '#140DEC',
   WHITE: '#FFFFFF',
   BLACK: '#000000',
   GRAY: '#4F4F4F',

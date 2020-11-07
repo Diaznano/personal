@@ -6,13 +6,14 @@ import PropTypes from 'prop-types';
 import { loginAction } from '../redux/user/actions';
 import { Button, Header, MaterialInput } from '../components';
 import { logo } from '../assets/images';
-import { validateRequiredField } from '../helpers';
+import { isIphone, validateRequiredField } from '../helpers';
 import colors from '../assets/colors';
 
 const styles = StyleSheet.create({
   container: { marginHorizontal: 20, marginTop: 20 },
   logo: { width: 200, height: 200, alignSelf: 'center' },
   containerSwitch: { flexDirection: 'row', alignItems: 'center', alignSelf: 'flex-end' },
+  textAdmin: isIphone && { marginRight: 10 },
 });
 
 const LoginScreen = ({
@@ -96,10 +97,11 @@ const LoginScreen = ({
           onChangeValue={handleOnChangeValue}
         />
         <View style={styles.containerSwitch}>
-          <Text>Login as admin</Text>
+          <Text style={styles.textAdmin}>Login as admin</Text>
           <Switch
-            thumbColor={isAdmin ? colors.PRIMARY_COLOR : colors.LIGHT_GRAY}
+            thumbColor={isAdmin ? colors.BLUE : colors.LIGHT_GRAY}
             trackColor={{ true: colors.PRIMARY_COLOR, false: colors.GRAY }}
+            ios_backgroundColor="#red"
             onValueChange={toggleSwitch}
             value={isAdmin}
           />
