@@ -1,6 +1,29 @@
 module.exports = {
-  root: true,
-  extends: '@react-native-community',
-  parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint'],
+  'extends': [
+    "airbnb",
+    "prettier",
+    "prettier/react",
+    "plugin:prettier/recommended",
+    "eslint-config-prettier"
+  ],
+  'parser': 'babel-eslint',
+  'env': {
+    'jest': true,
+  },
+  'rules': {
+    'react/jsx-filename-extension': 'off',
+    'prettier/prettier': [
+      "error",
+      {
+        "trailingComma": "es5",
+        "singleQuote": true,
+        "printWidth": 100,
+        "bracketSpacing": true,
+      }
+    ],
+    "react/jsx-props-no-spreading": "off"
+  },
+  'globals': {
+    "fetch": false
+  }
 };
