@@ -3,11 +3,12 @@ import { View, Image, StyleSheet, Switch, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { loginAction } from '../redux/user/actions';
+import { autoLoginAction, loginAction } from '../redux/user/actions';
 import { Button, Header, MaterialInput } from '../components';
 import { logo } from '../assets/images';
 import { isIphone, validateRequiredField } from '../helpers';
 import colors from '../assets/colors';
+import LocalStorageService from '../helpers/localStorageService';
 
 const styles = StyleSheet.create({
   container: { marginHorizontal: 20, marginTop: 20 },
@@ -17,13 +18,14 @@ const styles = StyleSheet.create({
 });
 
 const LoginScreen = ({
-  actions: { loginUser },
+  actions: { loginUser, autoLogin },
   loading,
   error,
   loginSuccess,
   navigation: { navigate },
+  admin,
 }) => {
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(admin);
   const [userData, setUserData] = useState({
     user: '',
     password: '',
@@ -32,8 +34,19 @@ const LoginScreen = ({
   });
 
   useEffect(() => {
+    LocalStorageService.getAccessToken().then((token) => {
+      if (token) {
+        LocalStorageService.getIsAdmin().then((type) => {
+          const typeAdmin = type === 'true';
+          autoLogin(token, typeAdmin);
+        });
+      }
+    });
+  }, []);
+
+  useEffect(() => {
     if (loginSuccess) {
-      if (isAdmin) {
+      if (admin) {
         navigate('AdminStack');
       } else {
         navigate('ClientStack');
@@ -116,12 +129,14 @@ LoginScreen.propTypes = {
   loading: PropTypes.bool.isRequired,
   actions: PropTypes.shape({
     loginUser: PropTypes.func,
+    autoLogin: PropTypes.func,
   }).isRequired,
   error: PropTypes.string,
   loginSuccess: PropTypes.bool.isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func,
   }).isRequired,
+  admin: PropTypes.bool.isRequired,
 };
 
 LoginScreen.defaultProps = {
@@ -132,12 +147,14 @@ const mapStoreToProps = (store) => ({
   loading: store.userReducer.fetchingLogin,
   loginSuccess: store.userReducer.loginSuccess,
   error: store.userReducer.error,
+  admin: store.userReducer.isAdmin,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators(
     {
       loginUser: loginAction,
+      autoLogin: autoLoginAction,
     },
     dispatch
   ),

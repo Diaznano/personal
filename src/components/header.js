@@ -8,9 +8,10 @@ import { arrowBack } from '../assets/images';
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.PRIMARY_COLOR,
-    height: 69,
-    justifyContent: 'center',
+    height: 55,
+    justifyContent: 'space-between',
     alignItems: 'center',
+    flexDirection: 'row',
   },
   title: {
     fontSize: 20,
@@ -21,21 +22,15 @@ const styles = StyleSheet.create({
     width: 15,
     height: 15,
   },
-  iconContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'absolute',
-    height: 69,
-    width: 50,
-    top: 0,
-    left: 0,
-  },
+  containerLeft: { flex: 0.8, alignItems: 'flex-start', paddingLeft: 10 },
+  containerRigth: { flex: 0.8, alignItems: 'flex-end', paddingRight: 10 },
+  containerCenter: { flex: 1.2, justifyContent: 'center' },
 });
 
 const Header = ({ title, showGoBackButton, navigation: { goBack }, renderRigthButton }) => {
   const renderBackButton = () => {
     return (
-      <TouchableOpacity onPress={() => goBack()} style={styles.iconContainer}>
+      <TouchableOpacity onPress={() => goBack()}>
         <Image source={arrowBack} style={styles.icon} />
       </TouchableOpacity>
     );
@@ -44,9 +39,11 @@ const Header = ({ title, showGoBackButton, navigation: { goBack }, renderRigthBu
   return (
     <SafeAreaView>
       <View style={styles.container}>
-        {showGoBackButton && renderBackButton()}
-        <Text style={styles.title}>{title}</Text>
-        {renderRigthButton && renderRigthButton()}
+        <View style={styles.containerLeft}>{showGoBackButton && renderBackButton()}</View>
+        <View style={styles.containerCenter}>
+          <Text style={styles.title}>{title}</Text>
+        </View>
+        <View style={styles.containerRigth}>{renderRigthButton && renderRigthButton()}</View>
       </View>
     </SafeAreaView>
   );
@@ -58,7 +55,7 @@ Header.propTypes = {
   navigation: PropTypes.shape({
     goBack: PropTypes.func,
   }).isRequired,
-  renderRigthButton: PropTypes.element,
+  renderRigthButton: PropTypes.func,
 };
 
 Header.defaultProps = {

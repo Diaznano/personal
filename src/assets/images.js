@@ -9,6 +9,9 @@ const balanceIcon = require('./images/balance.png');
 const reportsIcon = require('./images/reports.png');
 const newMovementIcon = require('./images/new_movement.png');
 const profileIcon = require('./images/profile.png');
+const editIcon = require('./images/edit.png');
+const trashIcon = require('./images/trash.png');
+const addCircle = require('./images/add_circle.png');
 
 export {
   visibilityIcon,
@@ -22,4 +25,7 @@ export {
   reportsIcon,
   newMovementIcon,
   profileIcon,
+  editIcon,
+  trashIcon,
+  addCircle,
 };

@@ -1,4 +1,5 @@
 import { Platform } from 'react-native';
+import Toast from 'react-native-simple-toast';
 
 const isIphone = Platform.OS === 'ios';
 
@@ -18,4 +19,8 @@ const validateRequiredField = (requiredFields, fieldsValues) => {
   return error ? errors : null;
 };
 
-export { validateRequiredField, isIphone };
+const showToast = (message) => {
+  return Toast.show(message, Toast.SHORT, ['UIAlertController']);
+};
+
+export { validateRequiredField, isIphone, showToast };

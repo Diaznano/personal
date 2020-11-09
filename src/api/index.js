@@ -1,7 +1,11 @@
 import { API } from './config';
+import { Paths } from '../constants';
 
-const login = (data) => API().post('/1a292dce-a20a-4d74-b09e-9ba1a51b8de0', data);
+const login = (data) => API().post(Paths.LOGIN, data);
 
-export {
-  login
-};
+const getCurrencies = () => API().get(Paths.CURRENCIES);
+const createCurrency = (data) => API().post(Paths.CREATE_CURRENCY, data);
+const updateCurrency = (data) => API().post(Paths.UPDATE_CURRENCY, data);
+const deleteCurrency = (id) => API().delete(Paths.DELETE_CURRENCY, id);
+
+export { login, getCurrencies, createCurrency, updateCurrency, deleteCurrency };
