@@ -124,6 +124,7 @@ export default (state = initialState, action) => {
         successCreatingCurrency: false,
         successUpdatingCurrency: false,
         successDeletingCurrency: false,
+        error: '',
       };
     }
 

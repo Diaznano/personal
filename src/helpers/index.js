@@ -1,4 +1,4 @@
-import { Platform } from 'react-native';
+import { Platform, PermissionsAndroid } from 'react-native';
 import Toast from 'react-native-simple-toast';
 
 const isIphone = Platform.OS === 'ios';
@@ -23,4 +23,25 @@ const showToast = (message) => {
   return Toast.show(message, Toast.SHORT, ['UIAlertController']);
 };
 
-export { validateRequiredField, isIphone, showToast };
+const checkAllPermissions = async () => {
+  if (isIphone) return true;
+  try {
+    await PermissionsAndroid.requestMultiple([
+      PermissionsAndroid.PERMISSIONS.CAMERA,
+      PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+      PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+    ]);
+    if (
+      (await PermissionsAndroid.check('android.permission.CAMERA')) &&
+      (await PermissionsAndroid.check('android.permission.WRITE_EXTERNAL_STORAGE')) &&
+      (await PermissionsAndroid.check('android.permission.READ_EXTERNAL_STORAGE'))
+    ) {
+      return true;
+    }
+    return false;
+  } catch (err) {
+    return false;
+  }
+};
+
+export { validateRequiredField, isIphone, showToast, checkAllPermissions };

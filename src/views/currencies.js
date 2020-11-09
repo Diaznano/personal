@@ -1,7 +1,14 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { FlatList, Text, SafeAreaView, Alert, Image, StyleSheet } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import {
+  FlatList,
+  Text,
+  SafeAreaView,
+  Alert,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { addCircle } from '../assets/images';
@@ -16,15 +23,32 @@ const styles = StyleSheet.create({
 });
 
 const Currencies = ({
+  navigation,
   navigation: { navigate },
   actions: { getCurrencies, deleteCurrency },
   currencies,
+  successDeletingCurrency,
   error,
   loading,
 }) => {
   useEffect(() => {
     getCurrencies();
   }, []);
+
+  useEffect(() => {
+    const navFocusListener = navigation.addListener('didFocus', async () => {
+      getCurrencies();
+    });
+    return () => {
+      navFocusListener.remove();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (successDeletingCurrency) {
+      getCurrencies();
+    }
+  }, [successDeletingCurrency]);
 
   useEffect(() => {
     if (error !== '') {
@@ -92,6 +116,7 @@ const Currencies = ({
 Currencies.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func,
+    addListener: PropTypes.func,
   }).isRequired,
   actions: PropTypes.shape({
     getCurrencies: PropTypes.func,
@@ -100,6 +125,7 @@ Currencies.propTypes = {
   currencies: PropTypes.array,
   loading: PropTypes.bool.isRequired,
   error: PropTypes.string,
+  successDeletingCurrency: PropTypes.bool.isRequired,
 };
 
 Currencies.defaultProps = {
@@ -110,6 +136,7 @@ Currencies.defaultProps = {
 const mapStoreToProps = (store) => ({
   currencies: store.currencyReducer.currencies,
   loading: store.currencyReducer.fetchingCurrencies,
+  successDeletingCurrency: store.currencyReducer.successDeletingCurrency,
   error: store.currencyReducer.error,
 });
 

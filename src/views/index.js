@@ -7,6 +7,7 @@ import Reports from './reports';
 import Movements from './movements';
 import Profile from './profile';
 import Currency from './currency';
+import Client from './client';
 
 export {
   Login,
@@ -18,4 +19,5 @@ export {
   Movements,
   Profile,
   Currency,
+  Client,
 };

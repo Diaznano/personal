@@ -3,7 +3,7 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 import colors from '../assets/colors';
-import { Login, Currency } from '../views';
+import { Login, Currency, Client } from '../views';
 import clientBottomRoutes from './clientBottomRoutes';
 import adminBottomRoutes from './adminBottomRoutes';
 
@@ -49,6 +49,12 @@ const AdminStack = createStackNavigator({
   },
   Currency: {
     screen: Currency,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  Client: {
+    screen: Client,
     navigationOptions: {
       headerShown: false,
     },
