@@ -13,7 +13,7 @@ const API = (contentType = 'application/json') => {
 
   instance.interceptors.response.use(
     (response) => response,
-    async (error) => Promise.reject(error),
+    async (error) => Promise.reject(error)
   );
 
   return instance;

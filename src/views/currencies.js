@@ -51,7 +51,7 @@ const Currencies = ({
   }, [successDeletingCurrency]);
 
   useEffect(() => {
-    if (error !== '') {
+    if (error) {
       showToast(error);
     }
   }, [error]);

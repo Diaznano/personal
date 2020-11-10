@@ -8,6 +8,7 @@ import { ClientItem, Header } from '../components';
 import { addCircle } from '../assets/images';
 import { getClientsAction, deleteClientAction } from '../redux/client/actions';
 import { Errors } from '../constants';
+import { showToast } from '../helpers';
 
 const styles = StyleSheet.create({
   container: { flex: 1, margin: 20 },
@@ -20,10 +21,24 @@ const Clients = ({
   actions: { getClients, deleteClient },
   clients,
   fetchingClients,
+  successDeletingClient,
+  error,
 }) => {
   useEffect(() => {
     getClients();
   }, []);
+
+  useEffect(() => {
+    if (successDeletingClient) {
+      getClients();
+    }
+  }, [successDeletingClient]);
+
+  useEffect(() => {
+    if (error) {
+      showToast(error);
+    }
+  }, [error]);
 
   useEffect(() => {
     const navFocusListener = navigation.addListener('didFocus', async () => {
@@ -96,10 +111,13 @@ Clients.propTypes = {
   actions: PropTypes.shape({ getClients: PropTypes.func, deleteClient: PropTypes.func }).isRequired,
   clients: PropTypes.array,
   fetchingClients: PropTypes.bool.isRequired,
+  successDeletingClient: PropTypes.bool.isRequired,
+  error: PropTypes.string,
 };
 
 Clients.defaultProps = {
   clients: [],
+  error: '',
 };
 
 const mapStoreToProps = (store) => ({

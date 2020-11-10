@@ -1,6 +1,7 @@
 import actionTypes from './types';
 import { createClient, deleteClient, getClients, getProfile, updateClient } from '../../api';
 import { showToast } from '../../helpers';
+import { Errors } from '../../constants';
 
 const getClientsAction = () => async (dispatch) => {
   dispatch({ type: actionTypes.FETCHING_CLIENTS });
@@ -16,7 +17,7 @@ const getClientsAction = () => async (dispatch) => {
   } catch (e) {
     dispatch({
       type: actionTypes.FETCHING_CLIENTS_ERROR,
-      payload: 'Something went wrong. please try again.',
+      payload: Errors.service,
     });
   }
 };
@@ -33,7 +34,7 @@ const createClientAction = (data) => async (dispatch) => {
       type: actionTypes.CREATING_CLIENT_SUCCESS,
     });
   } catch (e) {
-    const error = 'Something went wrong. please try again.';
+    const error = Errors.service;
     showToast(error);
     dispatch({
       type: actionTypes.CREATING_CLIENT_ERROR,
@@ -54,7 +55,7 @@ const updateClientAction = (data) => async (dispatch) => {
       type: actionTypes.UPDATING_CLIENT_SUCCESS,
     });
   } catch (e) {
-    const error = 'Something went wrong. please try again.';
+    const error = Errors.service;
     showToast(error);
     dispatch({
       type: actionTypes.UPDATING_CLIENT_ERROR,
@@ -75,7 +76,7 @@ const deleteClientAction = (id) => async (dispatch) => {
       type: actionTypes.DELETING_CLIENT_SUCCESS,
     });
   } catch (e) {
-    const error = 'Something went wrong. please try again.';
+    const error = Errors.service;
     showToast(error);
     dispatch({
       type: actionTypes.DELETING_CLIENT_ERROR,
@@ -98,7 +99,7 @@ const getProfileAction = () => async (dispatch) => {
   } catch (e) {
     dispatch({
       type: actionTypes.FETCHING_PROFILE_ERROR,
-      payload: 'Something went wrong. please try again.',
+      payload: Errors.service,
     });
   }
 };

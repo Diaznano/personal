@@ -39,7 +39,7 @@ const Client = ({
   }, [getParam('isNew')]);
 
   useEffect(() => {
-    if (error !== '') {
+    if (error) {
       showToast(error);
     }
   }, [error]);

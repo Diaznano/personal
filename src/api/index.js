@@ -14,6 +14,11 @@ const updateClient = (data) => API().post(Paths.UPDATE_CLIENT, data);
 const deleteClient = (id) => API().delete(Paths.DELETE_CLIENT, id);
 const getProfile = () => API().get(Paths.PROFILE);
 
+const getCategories = () => API().get(Paths.CATEGORIES);
+const createCategory = (data) => API().post(Paths.CREATE_CATEGORY, data);
+const updateCategory = (data) => API().post(Paths.UPDATE_CATEGORY, data);
+const deleteCategory = (id) => API().delete(Paths.DELETE_CATEGORY, id);
+
 export {
   login,
   getCurrencies,
@@ -25,4 +30,8 @@ export {
   updateClient,
   deleteClient,
   getProfile,
+  getCategories,
+  createCategory,
+  updateCategory,
+  deleteCategory,
 };
