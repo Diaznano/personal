@@ -153,7 +153,7 @@ Client.propTypes = {
   creatingClient: PropTypes.bool.isRequired,
   updatingClient: PropTypes.bool.isRequired,
   successCreatingClient: PropTypes.bool.isRequired,
-  successUpdatingClient: PropTypes.bool.isRequired,
+  successUpdatingClient: PropTypes.bool,
   actions: PropTypes.shape({
     resetInfo: PropTypes.func,
     createClient: PropTypes.func,
@@ -163,6 +163,7 @@ Client.propTypes = {
 
 Client.defaultProps = {
   error: '',
+  successUpdatingClient: undefined,
 };
 
 const mapStoreToProps = (store) => ({

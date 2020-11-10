@@ -1,25 +1,16 @@
 import React, { useEffect } from 'react';
 
-import {
-  Alert,
-  FlatList,
-  SafeAreaView,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
+import { Alert, FlatList, SafeAreaView, Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { Header, ListItem } from '../components';
+import { FloatButton, Header, ListItem } from '../components';
 import { deleteCategoryAction, getCategoriesAction } from '../redux/category/actions';
-import { addCircle } from '../assets/images';
 import { showToast } from '../helpers';
+import { Errors } from '../constants';
 
 const styles = StyleSheet.create({
   container: { flex: 1, margin: 20 },
-  icon: { height: 30, width: 30 },
 });
 
 const Categories = ({
@@ -69,7 +60,7 @@ const Categories = ({
     navigate('Category', { category: item, isNew: false });
   };
 
-  const HandleNewCategory = () => {
+  const handleNewCategory = () => {
     navigate('Category', { isNew: true });
   };
 
@@ -81,27 +72,22 @@ const Categories = ({
     />
   );
 
-  const renderAddCategory = () => (
-    <TouchableOpacity onPress={HandleNewCategory}>
-      <Image source={addCircle} style={styles.icon} />
-    </TouchableOpacity>
-  );
-
   return (
     <>
-      <Header title="Categories" renderRigthButton={renderAddCategory} />
+      <Header title="Categories" logOut />
       <SafeAreaView style={styles.container}>
         <FlatList
           data={categories}
           keyExtractor={(item) => keyExtractor(item)}
           renderItem={({ item }) => renderItem(item)}
           ListEmptyComponent={() => {
-            return !fetchingCategories ? <Text>No data found</Text> : null;
+            return !fetchingCategories ? <Text>{Errors.empty}</Text> : null;
           }}
           refreshing={fetchingCategories}
           onRefresh={() => getCategories()}
         />
       </SafeAreaView>
+      <FloatButton onPress={handleNewCategory} />
     </>
   );
 };

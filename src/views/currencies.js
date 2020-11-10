@@ -1,25 +1,15 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import {
-  FlatList,
-  Text,
-  SafeAreaView,
-  Alert,
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
+import { FlatList, Text, SafeAreaView, Alert, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { addCircle } from '../assets/images';
-import { Header, ListItem } from '../components';
+import { FloatButton, Header, ListItem } from '../components';
 import { Errors } from '../constants';
 import { deleteCurrencyAction, getCurrenciesAction } from '../redux/currency/actions';
 import { showToast } from '../helpers';
 
 const styles = StyleSheet.create({
   container: { flex: 1, margin: 20 },
-  icon: { width: 30, height: 30 },
 });
 
 const Currencies = ({
@@ -88,15 +78,9 @@ const Currencies = ({
     navigate('Currency', { isNew: true });
   };
 
-  const renderAddCurrency = () => (
-    <TouchableOpacity onPress={handleNewCurrency}>
-      <Image source={addCircle} style={styles.icon} />
-    </TouchableOpacity>
-  );
-
   return (
     <>
-      <Header title="Currencies" renderRigthButton={renderAddCurrency} />
+      <Header title="Currencies" logOut />
       <SafeAreaView style={styles.container}>
         <FlatList
           data={currencies}
@@ -109,6 +93,7 @@ const Currencies = ({
           onRefresh={() => getCurrencies()}
         />
       </SafeAreaView>
+      <FloatButton onPress={handleNewCurrency} />
     </>
   );
 };

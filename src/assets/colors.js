@@ -8,6 +8,7 @@ const colors = {
   ERROR: '#F40000',
   GREEN: '#008464',
   SPINNER_COLOR: '#CCCCCC',
+  SHADOW: '#1f1f1f',
 };
 
 export default colors;

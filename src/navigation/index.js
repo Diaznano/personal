@@ -6,6 +6,7 @@ import colors from '../assets/colors';
 import { Login, Currency, Client, Category } from '../views';
 import clientBottomRoutes from './clientBottomRoutes';
 import adminBottomRoutes from './adminBottomRoutes';
+import navigationService from '../helpers/navigationService';
 
 const tabBaseConfig = {
   tabBarPosition: 'bottom',
@@ -94,4 +95,10 @@ const router = createSwitchNavigator(
 
 const AppContainer = createAppContainer(router);
 
-export default () => <AppContainer />;
+export default () => (
+  <AppContainer
+    ref={(navigatorRef) => {
+      navigationService.setTopLevelNavigator(navigatorRef);
+    }}
+  />
+);

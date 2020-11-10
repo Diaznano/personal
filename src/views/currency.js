@@ -35,8 +35,10 @@ const Currency = ({
   }, [getParam('isNew')]);
 
   useEffect(() => {
-    showToast(error);
-  }, error);
+    if (error) {
+      showToast(error);
+    }
+  }, [error]);
 
   useEffect(() => {
     const currency = getParam('currency');

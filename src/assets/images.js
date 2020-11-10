@@ -12,6 +12,10 @@ const profileIcon = require('./images/profile.png');
 const editIcon = require('./images/edit.png');
 const trashIcon = require('./images/trash.png');
 const addCircle = require('./images/add_circle.png');
+const logoutIcon = require('./images/logout.png');
+const optionsIcon = require('./images/options.png');
+const arrowBalanceIcon = require('./images/arrow_balance.png');
+const arrowDownIcon = require('./images/arrow_down.png');
 
 export {
   visibilityIcon,
@@ -28,4 +32,8 @@ export {
   editIcon,
   trashIcon,
   addCircle,
+  logoutIcon,
+  optionsIcon,
+  arrowBalanceIcon,
+  arrowDownIcon,
 };

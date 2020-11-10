@@ -19,6 +19,12 @@ const createCategory = (data) => API().post(Paths.CREATE_CATEGORY, data);
 const updateCategory = (data) => API().post(Paths.UPDATE_CATEGORY, data);
 const deleteCategory = (id) => API().delete(Paths.DELETE_CATEGORY, id);
 
+const getBalance = () => API().get(Paths.BALANCE);
+const getExpensesForecast = () => API().get(Paths.EXPENSES_FORECAST);
+const getExpensesByMonthsByCategory = () => API().get(Paths.EXPENSES_BY_MONTHS_BY_CATEGORY);
+const getExpensesByMonthsByDay = () => API().get(Paths.EXPENSES_BY_MONTHS_BY_DAY);
+const getReportMovements = () => API().get(Paths.REPORT_MOVEMENTS);
+
 export {
   login,
   getCurrencies,
@@ -34,4 +40,9 @@ export {
   createCategory,
   updateCategory,
   deleteCategory,
+  getBalance,
+  getExpensesByMonthsByCategory,
+  getExpensesForecast,
+  getExpensesByMonthsByDay,
+  getReportMovements,
 };

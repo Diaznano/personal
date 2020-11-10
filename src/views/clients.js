@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
-import { Alert, FlatList, Image, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Alert, FlatList, StyleSheet, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { ClientItem, Header } from '../components';
-import { addCircle } from '../assets/images';
+import { ClientItem, FloatButton, Header } from '../components';
 import { getClientsAction, deleteClientAction } from '../redux/client/actions';
 import { Errors } from '../constants';
 import { showToast } from '../helpers';
@@ -81,15 +80,9 @@ const Clients = ({
     />
   );
 
-  const renderAddClient = () => (
-    <TouchableOpacity onPress={handleNewClient}>
-      <Image source={addCircle} style={styles.icon} />
-    </TouchableOpacity>
-  );
-
   return (
     <>
-      <Header title="Clients" renderRigthButton={renderAddClient} />
+      <Header title="Clients" logOut />
       <SafeAreaView style={styles.container}>
         <FlatList
           data={clients}
@@ -102,6 +95,7 @@ const Clients = ({
           onRefresh={() => getClients()}
         />
       </SafeAreaView>
+      <FloatButton onPress={handleNewClient} />
     </>
   );
 };
