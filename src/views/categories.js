@@ -19,6 +19,7 @@ const Categories = ({
   categories,
   fetchingCategories,
   actions: { getCategories, deleteCategory },
+  successDeletingCategory,
   error,
 }) => {
   useEffect(() => {
@@ -30,6 +31,12 @@ const Categories = ({
       showToast(error);
     }
   }, [error]);
+
+  useEffect(() => {
+    if (successDeletingCategory) {
+      getCategories();
+    }
+  }, [successDeletingCategory]);
 
   useEffect(() => {
     const navFocusListener = navigation.addListener('didFocus', async () => {
@@ -67,7 +74,7 @@ const Categories = ({
   const renderItem = (item) => (
     <ListItem
       item={item}
-      onPressDelete={() => handleDeleteCategory(item.id)}
+      onPressDelete={() => handleDeleteCategory(item)}
       onPressEdit={() => handleEditCategory(item)}
     />
   );

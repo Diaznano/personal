@@ -124,6 +124,7 @@ export default (state = initialState, action) => {
         successCreatingCategory: false,
         successUpdatingCategory: false,
         successDeletingCategory: false,
+        error: '',
       };
     }
 

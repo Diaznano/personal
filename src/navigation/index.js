@@ -3,7 +3,7 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 import colors from '../assets/colors';
-import { Login, Currency, Client, Category } from '../views';
+import { Login, Currency, Client, Category, Movement } from '../views';
 import clientBottomRoutes from './clientBottomRoutes';
 import adminBottomRoutes from './adminBottomRoutes';
 import navigationService from '../helpers/navigationService';
@@ -33,6 +33,18 @@ const clientBottomTabs = createMaterialTopTabNavigator(clientBottomRoutes, tabBa
 const ClientStack = createStackNavigator({
   Home: {
     screen: clientBottomTabs,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  Category: {
+    screen: Category,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  Movement: {
+    screen: Movement,
     navigationOptions: {
       headerShown: false,
     },

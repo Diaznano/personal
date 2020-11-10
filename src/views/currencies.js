@@ -67,7 +67,7 @@ const Currencies = ({
   const renderItem = (item) => (
     <ListItem
       item={item}
-      onPressDelete={() => handleDeleteCurrency(item.id)}
+      onPressDelete={() => handleDeleteCurrency(item)}
       onPressEdit={() => handleEditCurrency(item)}
     />
   );

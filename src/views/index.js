@@ -9,6 +9,7 @@ import Profile from './profile';
 import Currency from './currency';
 import Client from './client';
 import Category from './category';
+import Movement from './movement';
 
 export {
   Login,
@@ -22,4 +23,5 @@ export {
   Currency,
   Client,
   Category,
+  Movement,
 };

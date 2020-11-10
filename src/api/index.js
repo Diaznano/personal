@@ -25,6 +25,11 @@ const getExpensesByMonthsByCategory = () => API().get(Paths.EXPENSES_BY_MONTHS_B
 const getExpensesByMonthsByDay = () => API().get(Paths.EXPENSES_BY_MONTHS_BY_DAY);
 const getReportMovements = () => API().get(Paths.REPORT_MOVEMENTS);
 
+const getMovements = () => API().get(Paths.MOVEMENTS);
+const createMovement = (data) => API().post(Paths.CREATE_MOVEMENT, data);
+const updateMovement = (data) => API().post(Paths.UPDATE_MOVEMENT, data);
+const deleteMovement = (id) => API().delete(Paths.DELETE_MOVEMENT, id);
+
 export {
   login,
   getCurrencies,
@@ -45,4 +50,8 @@ export {
   getExpensesForecast,
   getExpensesByMonthsByDay,
   getReportMovements,
+  getMovements,
+  createMovement,
+  updateMovement,
+  deleteMovement,
 };

@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const MaterialSelect = ({ data, value, onSelect }) => {
+const MaterialSelect = ({ data, value, onSelect, backWhite }) => {
   const materialSelectRef = useRef(null);
 
   const openModal = () => {
@@ -48,7 +48,9 @@ const MaterialSelect = ({ data, value, onSelect }) => {
       <ModalView ref={materialSelectRef}>
         <SelectOption onClose={hideModal} data={data} onPressItem={onSelectItem} />
       </ModalView>
-      <TouchableOpacity onPress={openModal} style={styles.container}>
+      <TouchableOpacity
+        onPress={openModal}
+        style={[styles.container, backWhite && { backgroundColor: colors.WHITE }]}>
         <Text>{value}</Text>
         {renderArrow()}
       </TouchableOpacity>
@@ -60,6 +62,11 @@ MaterialSelect.propTypes = {
   data: PropTypes.array.isRequired,
   value: PropTypes.string.isRequired,
   onSelect: PropTypes.func.isRequired,
+  backWhite: PropTypes.bool,
 };
+
+MaterialSelect.defaultProps = {
+  backWhite: false,
+}
 
 export default MaterialSelect;

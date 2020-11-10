@@ -75,7 +75,7 @@ const Clients = ({
   const renderItem = (item) => (
     <ClientItem
       item={item}
-      onPressDelete={() => handleDeleteClient(item.id)}
+      onPressDelete={() => handleDeleteClient(item)}
       onPressEdit={() => handleOnPressEdit(item)}
     />
   );

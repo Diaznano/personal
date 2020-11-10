@@ -5,6 +5,7 @@ import currencyReducer from './currency';
 import clientReducer from './client';
 import categoryReducer from './category';
 import reportsReducer from './reports';
+import movementsReducer from './movements';
 
 const appReducer = combineReducers({
   userReducer,
@@ -12,6 +13,7 @@ const appReducer = combineReducers({
   clientReducer,
   categoryReducer,
   reportsReducer,
+  movementsReducer,
 });
 
 export default (state, action) => {
