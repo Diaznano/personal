@@ -12,6 +12,7 @@ import ModalView from './modalView';
 import SelectOption from './selectOption';
 import SelectOptionItem from './selectOptionItem';
 import MaterialSelect from './materialSelect';
+import EditAvatar from './editAvatar';
 
 export {
   MaterialInput,
@@ -28,4 +29,5 @@ export {
   SelectOption,
   SelectOptionItem,
   MaterialSelect,
+  EditAvatar,
 };

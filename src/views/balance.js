@@ -12,13 +12,27 @@ const styles = StyleSheet.create({
   container: { flex: 1, margin: 20 },
 });
 
-const Balance = ({ actions: { getBalance }, fetchingBalance, balances }) => {
+const Balance = ({
+  navigation: { addListener },
+  actions: { getBalance },
+  fetchingBalance,
+  balances,
+}) => {
   useEffect(() => {
     getBalance();
   }, []);
   const renderItem = (item) => <BalanceItem item={item} />;
 
   const keyExtractor = (item) => `${item.id}`;
+
+  useEffect(() => {
+    const navFocusListener = addListener('didFocus', async () => {
+      getBalance();
+    });
+    return () => {
+      navFocusListener.remove();
+    };
+  }, []);
 
   return (
     <>
@@ -45,6 +59,9 @@ Balance.propTypes = {
   }).isRequired,
   fetchingBalance: PropTypes.bool.isRequired,
   balances: PropTypes.array,
+  navigation: PropTypes.shape({
+    addListener: PropTypes.func,
+  }).isRequired,
 };
 
 Balance.defaultProps = {

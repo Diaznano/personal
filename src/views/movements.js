@@ -8,6 +8,7 @@ import { Errors } from '../constants';
 import { deleteMovementAction, getMovementsAction } from '../redux/movements/actions';
 
 const Movements = ({
+  navigation,
   navigation: { navigate },
   fetchingMovements,
   movements,
@@ -23,6 +24,15 @@ const Movements = ({
       getMovements();
     }
   }, [successDeletingMovement]);
+
+  useEffect(() => {
+    const navFocusListener = navigation.addListener('didFocus', async () => {
+      getMovements();
+    });
+    return () => {
+      navFocusListener.remove();
+    };
+  }, []);
 
   const handleDeleteMovement = (id) => {
     Alert.alert('Delete movement', 'Are you sure?', [
@@ -79,7 +89,7 @@ const Movements = ({
 };
 
 Movements.propTypes = {
-  navigation: PropTypes.shape({ navigate: PropTypes.func }).isRequired,
+  navigation: PropTypes.shape({ navigate: PropTypes.func, addListener: PropTypes.func }).isRequired,
   fetchingMovements: PropTypes.bool.isRequired,
   movements: PropTypes.array.isRequired,
   successDeletingMovement: PropTypes.bool.isRequired,

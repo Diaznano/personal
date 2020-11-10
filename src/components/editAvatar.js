@@ -57,7 +57,7 @@ const EditAvatar = ({ photoSource, setPhoto }) => {
     <View style={styles.container}>
       <Image
         resizeMode="cover"
-        source={{ uri: photoSource }}
+        source={{ uri: photoSource || null }}
         style={styles.photo}
         borderRadius={100}
       />
