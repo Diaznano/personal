@@ -67,18 +67,15 @@ const updateMovementAction = (data) => async (dispatch) => {
 const deleteMovementAction = (id) => async (dispatch) => {
   dispatch({ type: actionTypes.DELETING_MOVEMENT });
   try {
-    console.log('--', id);
     const response = await deleteMovement(id);
     const {
       data: { message },
     } = response;
-    console.log('--res', response);
     showToast(message);
     dispatch({
       type: actionTypes.DELETING_MOVEMENT_SUCCESS,
     });
   } catch (e) {
-    console.log('--resss', e);
     const error = Errors.service;
     showToast(error);
     dispatch({

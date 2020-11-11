@@ -45,7 +45,6 @@ const Movement = ({
 
   useEffect(() => {
     const movement = getParam('movement');
-    console.log('--', movement);
     if (movement) {
       setMovementData(movement);
     }
