@@ -10,7 +10,7 @@ import { updateClientAction, resetInfoAction, getProfileAction } from '../redux/
 const Profile = ({
   client,
   successUpdatingClient,
-  fetchingClient,
+  fetchingProfile,
   updatingClient,
   actions: { updateClient, resetInfo, getProfile },
 }) => {
@@ -89,7 +89,7 @@ const Profile = ({
   return (
     <>
       <Header title="Profile" logOut />
-      {client && !fetchingClient && (
+      {client && !fetchingProfile && (
         <ScrollView style={{ margin: 20, flex: 1 }} showsVerticalScrollIndicator={false}>
           <View style={{ paddingBottom: 100 }}>
             <EditAvatar photoSource={photoSource.uri} setPhoto={setPhotoSource} />
@@ -129,9 +129,9 @@ const Profile = ({
 Profile.propTypes = {
   client: PropTypes.shape({
     photo_url: PropTypes.string,
-  }).isRequired,
-  successUpdatingClient: PropTypes.bool.isRequired,
-  fetchingClient: PropTypes.bool.isRequired,
+  }),
+  successUpdatingClient: PropTypes.bool,
+  fetchingProfile: PropTypes.bool.isRequired,
   updatingClient: PropTypes.bool.isRequired,
   actions: PropTypes.shape({
     updateClient: PropTypes.func,
@@ -140,9 +140,14 @@ Profile.propTypes = {
   }).isRequired,
 };
 
+Profile.defaultProps = {
+  successUpdatingClient: false,
+  client: null,
+};
+
 const mapStoreToProps = (store) => ({
   client: store.clientReducer.client,
-  fetchingClient: store.clientReducer.fetchingClient,
+  fetchingProfile: store.clientReducer.fetchingProfile,
   updatingClient: store.clientReducer.updatingClient,
   successUpdatingClient: store.clientReducer.successUpdatingClient,
 });
