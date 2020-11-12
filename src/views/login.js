@@ -99,7 +99,7 @@ const LoginScreen = ({
           value={userData.user}
           inputKey="user"
           label="User"
-          error={error}
+          error={userData.userError}
           onChangeValue={handleOnChangeValue}
         />
         <MaterialInput
@@ -107,6 +107,7 @@ const LoginScreen = ({
           inputKey="password"
           label="Password"
           showVisibilityIcon
+          error={userData.passwordError}
           onChangeValue={handleOnChangeValue}
         />
         <View style={styles.containerSwitch}>
